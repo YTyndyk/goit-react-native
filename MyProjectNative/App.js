@@ -13,6 +13,7 @@ export default function App() {
 	}
 	return (
 		<View style={styles.container}>
+			<Text style={styles.text}>Реєстрація</Text>
 			<Registration />
 			<StatusBar style="auto" />
 		</View>
@@ -25,5 +26,9 @@ const styles = StyleSheet.create({
 		backgroundColor: "#fff",
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	text: {
+		fontFamily: "R-500",
+		fontSize: 30,
 	},
 });
