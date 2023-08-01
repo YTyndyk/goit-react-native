@@ -1,15 +1,15 @@
+import { Ionicons } from "@expo/vector-icons";
 import {
 	StyleSheet,
 	Text,
 	View,
 	TextInput,
 	TouchableOpacity,
-	Button,
 	Image,
 	TouchableWithoutFeedback,
 	ImageBackground,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+
 export default function Registration() {
 	return (
 		<View>
