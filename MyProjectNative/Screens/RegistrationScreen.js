@@ -7,35 +7,84 @@ import {
 	Button,
 	Image,
 	TouchableWithoutFeedback,
+	ImageBackground,
 } from "react-native";
-
+import { Ionicons } from "@expo/vector-icons";
 export default function Registration() {
 	return (
 		<View>
-			<Image source={require("../assets/Empty.png")} style={styles.img} />
-			<View>
-				<Text style={styles.text}>Реєстрація</Text>
-			</View>
-			<TextInput style={styles.input} placeholder="Логін" />
-			<TextInput style={styles.input} placeholder="Адреса електронної пошти" />
-			<TextInput style={styles.input} placeholder="Пароль" />
-			<TouchableWithoutFeedback
-				onPress={() => console.log("Натиснули на Показати")}
+			<ImageBackground
+				source={require("../assets/photo.png")}
+				style={styles.image}
 			>
-				<Text style={styles.textInInput}>Показати</Text>
-			</TouchableWithoutFeedback>
+				<Image source={require("../assets/Empty.png")} style={styles.img} />
+				<Ionicons
+					name="add-circle-outline"
+					size={25}
+					color="rgba(255 108 0/ 1)"
+					style={styles.iconAdd}
+				/>
+				<View style={styles.formWrapper}>
+					<Text style={styles.text}>Реєстрація</Text>
+					<TextInput style={styles.input} placeholder="Логін" />
+					<TextInput
+						style={styles.input}
+						placeholder="Адреса електронної пошти"
+					/>
+					<TextInput style={styles.input} placeholder="Пароль" />
+					<TouchableWithoutFeedback
+						onPress={() => console.log("Натиснули на Показати")}
+					>
+						<Text style={styles.textInInput}>Показати</Text>
+					</TouchableWithoutFeedback>
 
-			<TouchableOpacity style={styles.button}>
-				<Text style={styles.ButtonText}>Зареєструватися</Text>
-			</TouchableOpacity>
-			<Button title="Вже є акаунт? Увійти" color={"rgba(27 67 113/ 1)"} />
+					<TouchableOpacity style={styles.button}>
+						<Text style={styles.ButtonText}>Зареєструватися</Text>
+					</TouchableOpacity>
+					<TouchableOpacity>
+						<Text style={styles.textAccount}>Вже є акаунт? Увійти</Text>
+					</TouchableOpacity>
+					<Image
+						source={require("../assets/indicator.png")}
+						style={styles.indicator}
+					/>
+				</View>
+			</ImageBackground>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
+	textAccount: {
+		fontFamily: "R-400",
+		fontSize: 16,
+		color: "rgba(27 67 113/ 1)",
+		textAlign: "center",
+		marginTop: 15,
+	},
+	iconAdd: {
+		top: 180,
+		left: 235,
+		zIndex: 2,
+	},
+	indicator: {
+		alignSelf: "center",
+		top: "8%",
+	},
+	formWrapper: {
+		backgroundColor: "rgba(255 255 255/ 1)",
+		borderTopStartRadius: 25,
+		borderTopEndRadius: 25,
+		height: 549,
+		marginTop: 140,
+	},
+	image: {
+		flex: 1,
+		resizeMode: "cover",
+		justifyContent: "center",
+	},
 	text: {
-		marginTop: 20,
+		marginTop: 100,
 		marginBottom: 20,
 		color: "rgba(33 33 33/ 1)",
 		textAlign: "center",
@@ -80,12 +129,14 @@ const styles = StyleSheet.create({
 		height: 120,
 		borderRadius: 16,
 		left: "35%",
+		top: "25%",
+		zIndex: 1,
 	},
 	textInInput: {
 		fontFamily: "R-400",
 		fontSize: 16,
 		color: "rgba(27 67 113/1)",
-		top: "-9,5%",
+		top: "-9%",
 		left: "70%",
 	},
 });
