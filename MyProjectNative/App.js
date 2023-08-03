@@ -1,23 +1,23 @@
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import Registration from "./Screens/RegistrationScreen";
+import { StyleSheet, SafeAreaView } from "react-native";
+import Registration from "./src/Screens/RegistrationScreen";
 // import Login from "./Screens/LoginScreen";
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
-		"R-400": require("./assets/fonts/Roboto-Regular.ttf"),
-		"R-500": require("./assets/fonts/Roboto-Medium.ttf"),
+		"R-400": require("./src/fonts/Roboto-Regular.ttf"),
+		"R-500": require("./src/fonts/Roboto-Medium.ttf"),
 	});
 	if (!fontsLoaded) {
 		return null;
 	}
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<Registration />
 			{/* <Login /> */}
 			<StatusBar style="auto" />
-		</View>
+		</SafeAreaView>
 	);
 }
 

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import {
 	StyleSheet,
@@ -11,13 +12,15 @@ import {
 } from "react-native";
 
 export default function Registration() {
+	const [focusLogin, setFocusLogin] = useState(false);
+
 	return (
 		<View>
 			<ImageBackground
-				source={require("../assets/photo.png")}
+				source={require("../../assets/photo.png")}
 				style={styles.image}
 			>
-				<Image source={require("../assets/Empty.png")} style={styles.img} />
+				<Image source={require("../../assets/Empty.png")} style={styles.img} />
 				<Ionicons
 					name="add-circle-outline"
 					size={25}
@@ -26,7 +29,15 @@ export default function Registration() {
 				/>
 				<View style={styles.formWrapper}>
 					<Text style={styles.text}>Реєстрація</Text>
-					<TextInput style={styles.input} placeholder="Логін" />
+					<TextInput
+						style={{
+							...styles.input,
+							borderColor: focusLogin ? "#FF6C00" : "#E8E8E8",
+						}}
+						placeholder="Логін"
+						onFocus={() => setFocusLogin(true)}
+						onBlur={() => setFocusLogin(false)}
+					/>
 					<TextInput
 						style={styles.input}
 						placeholder="Адреса електронної пошти"
@@ -45,7 +56,7 @@ export default function Registration() {
 						<Text style={styles.textAccount}>Вже є акаунт? Увійти</Text>
 					</TouchableOpacity>
 					<Image
-						source={require("../assets/indicator.png")}
+						source={require("../../assets/indicator.png")}
 						style={styles.indicator}
 					/>
 				</View>
@@ -97,7 +108,7 @@ const styles = StyleSheet.create({
 		height: 50,
 		backgroundColor: "rgba(246 246 246/ 1)",
 		borderWidth: 1,
-		borderColor: "rgba(232 232 232/ 1)",
+
 		borderRadius: 6,
 		fontSize: 16,
 		marginBottom: 15,
