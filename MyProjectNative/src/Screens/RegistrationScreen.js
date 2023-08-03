@@ -13,6 +13,9 @@ import {
 
 export default function Registration() {
 	const [focusLogin, setFocusLogin] = useState(false);
+	const [focusEmail, setFocusEmail] = useState(false);
+	const [focusPassword, setFocusPassword] = useState(false);
+	const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
 	return (
 		<View>
@@ -39,12 +42,30 @@ export default function Registration() {
 						onBlur={() => setFocusLogin(false)}
 					/>
 					<TextInput
-						style={styles.input}
+						style={{
+							...styles.input,
+							borderColor: focusEmail ? "#FF6C00" : "#E8E8E8",
+						}}
 						placeholder="Адреса електронної пошти"
+						onFocus={() => setFocusEmail(true)}
+						onBlur={() => setFocusEmail(false)}
 					/>
-					<TextInput style={styles.input} placeholder="Пароль" />
+					<TextInput
+						style={{
+							...styles.input,
+							borderColor: focusPassword ? "#FF6C00" : "#E8E8E8",
+						}}
+						placeholder="Пароль"
+						onFocus={() => setFocusPassword(true)}
+						onBlur={() => setFocusPassword(false)}
+						secureTextEntry={isPasswordSecure}
+					/>
 					<TouchableWithoutFeedback
-						onPress={() => console.log("Натиснули на Показати")}
+						onPress={() => {
+							isPasswordSecure
+								? setIsPasswordSecure(false)
+								: setIsPasswordSecure(true);
+						}}
 					>
 						<Text style={styles.textInInput}>Показати</Text>
 					</TouchableWithoutFeedback>
