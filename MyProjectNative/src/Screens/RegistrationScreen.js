@@ -9,6 +9,9 @@ import {
 	Image,
 	TouchableWithoutFeedback,
 	ImageBackground,
+	KeyboardAvoidingView,
+	Keyboard,
+	ScrollView,
 } from "react-native";
 
 export default function Registration() {
@@ -17,107 +20,125 @@ export default function Registration() {
 	const [focusPassword, setFocusPassword] = useState(false);
 	const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
+	const keyboardIsHidden = () => {
+		Keyboard.dismiss();
+	};
 	return (
-		<View>
-			<ImageBackground
-				source={require("../../assets/photo.png")}
-				style={styles.image}
-			>
-				<Image source={require("../../assets/Empty.png")} style={styles.img} />
-				<Ionicons
-					name="add-circle-outline"
-					size={25}
-					color="rgba(255 108 0/ 1)"
-					style={styles.iconAdd}
-				/>
-				<View style={styles.formWrapper}>
-					<Text style={styles.text}>Реєстрація</Text>
-					<TextInput
-						style={{
-							...styles.input,
-							borderColor: focusLogin ? "#FF6C00" : "#E8E8E8",
-						}}
-						placeholder="Логін"
-						onFocus={() => setFocusLogin(true)}
-						onBlur={() => setFocusLogin(false)}
-					/>
-					<TextInput
-						style={{
-							...styles.input,
-							borderColor: focusEmail ? "#FF6C00" : "#E8E8E8",
-						}}
-						placeholder="Адреса електронної пошти"
-						onFocus={() => setFocusEmail(true)}
-						onBlur={() => setFocusEmail(false)}
-					/>
-					<TextInput
-						style={{
-							...styles.input,
-							borderColor: focusPassword ? "#FF6C00" : "#E8E8E8",
-						}}
-						placeholder="Пароль"
-						onFocus={() => setFocusPassword(true)}
-						onBlur={() => setFocusPassword(false)}
-						secureTextEntry={isPasswordSecure}
-					/>
-					<TouchableWithoutFeedback
-						onPress={() => {
-							isPasswordSecure
-								? setIsPasswordSecure(false)
-								: setIsPasswordSecure(true);
-						}}
+		<KeyboardAvoidingView
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+		>
+			<TouchableWithoutFeedback onPress={keyboardIsHidden}>
+				<View>
+					<ImageBackground
+						source={require("../../assets/photo.png")}
+						style={styles.bgImage}
 					>
-						<Text style={styles.textInInput}>Показати</Text>
-					</TouchableWithoutFeedback>
+						<ScrollView>
+							<Image
+								source={require("../../assets/Empty.png")}
+								style={styles.img}
+							/>
+							<Ionicons
+								name="add-circle-outline"
+								size={25}
+								color="rgba(255 108 0/ 1)"
+								style={styles.iconAdd}
+							/>
+							<View style={styles.formWrapper}>
+								<Text style={styles.text}>Реєстрація</Text>
+								<TextInput
+									style={{
+										...styles.input,
+										borderColor: focusLogin ? "#FF6C00" : "#E8E8E8",
+									}}
+									placeholder="Логін"
+									onFocus={() => setFocusLogin(true)}
+									onBlur={() => setFocusLogin(false)}
+								/>
+								<TextInput
+									style={{
+										...styles.input,
+										borderColor: focusEmail ? "#FF6C00" : "#E8E8E8",
+									}}
+									placeholder="Адреса електронної пошти"
+									onFocus={() => setFocusEmail(true)}
+									onBlur={() => setFocusEmail(false)}
+								/>
+								<TextInput
+									style={{
+										...styles.input,
+										borderColor: focusPassword ? "#FF6C00" : "#E8E8E8",
+									}}
+									placeholder="Пароль"
+									onFocus={() => setFocusPassword(true)}
+									onBlur={() => setFocusPassword(false)}
+									secureTextEntry={isPasswordSecure}
+								/>
+								<TouchableWithoutFeedback
+									onPress={() => {
+										isPasswordSecure
+											? setIsPasswordSecure(false)
+											: setIsPasswordSecure(true);
+									}}
+								>
+									<Text style={styles.textInInput}>
+										{isPasswordSecure ? "Показати" : " Приховати"}
+									</Text>
+								</TouchableWithoutFeedback>
 
-					<TouchableOpacity style={styles.button}>
-						<Text style={styles.ButtonText}>Зареєструватися</Text>
-					</TouchableOpacity>
-					<TouchableOpacity>
-						<Text style={styles.textAccount}>Вже є акаунт? Увійти</Text>
-					</TouchableOpacity>
-					<Image
-						source={require("../../assets/indicator.png")}
-						style={styles.indicator}
-					/>
+								<TouchableOpacity style={styles.button}>
+									<Text style={styles.ButtonText}>Зареєструватися</Text>
+								</TouchableOpacity>
+								<TouchableOpacity>
+									<Text style={styles.textAccount}>Вже є акаунт? Увійти</Text>
+								</TouchableOpacity>
+								<Image
+									source={require("../../assets/indicator.png")}
+									style={styles.indicator}
+								/>
+							</View>
+						</ScrollView>
+					</ImageBackground>
 				</View>
-			</ImageBackground>
-		</View>
+			</TouchableWithoutFeedback>
+		</KeyboardAvoidingView>
 	);
 }
 
 const styles = StyleSheet.create({
+	bgImage: { resizeMode: "cover" },
 	textAccount: {
 		fontFamily: "R-400",
 		fontSize: 16,
 		color: "rgba(27 67 113/ 1)",
 		textAlign: "center",
-		marginTop: 15,
+		marginBottom: 45,
 	},
 	iconAdd: {
-		top: 180,
+		position: "absolute",
+		marginTop: 284,
 		left: 235,
-		zIndex: 2,
+		width: 25,
+		height: 25,
+		zIndex: 1,
 	},
 	indicator: {
 		alignSelf: "center",
-		top: "8%",
+		justifyContent: "flex-end",
+		marginBottom: 5,
+		marginBottom: 1,
 	},
 	formWrapper: {
 		backgroundColor: "rgba(255 255 255/ 1)",
 		borderTopStartRadius: 25,
 		borderTopEndRadius: 25,
-		height: 549,
-		marginTop: 140,
+		marginTop: 263,
 	},
-	image: {
-		flex: 1,
-		resizeMode: "cover",
-		justifyContent: "center",
-	},
+
 	text: {
-		marginTop: 100,
-		marginBottom: 20,
+		marginTop: 92,
+		marginBottom: 32,
+		lineHeight: 35,
 		color: "rgba(33 33 33/ 1)",
 		textAlign: "center",
 		fontFamily: "R-500",
@@ -129,46 +150,48 @@ const styles = StyleSheet.create({
 		height: 50,
 		backgroundColor: "rgba(246 246 246/ 1)",
 		borderWidth: 1,
-
-		borderRadius: 6,
+		borderRadius: 8,
 		fontSize: 16,
-		marginBottom: 15,
-		marginLeft: 16,
-		marginRight: 16,
-		paddingLeft: 10,
+		marginBottom: 16,
+		marginHorizontal: 16,
+		paddingHorizontal: 16,
+		paddingTop: 16,
+		paddingBottom: 15,
 	},
 	button: {
 		fontFamily: "R-400",
 		backgroundColor: "rgba(255 108 0/ 1)",
-		width: 343,
 		height: 51,
-		paddingTop: 16,
-		paddingRight: 32,
-		paddingBottom: 16,
-		paddingLeft: 32,
-		marginLeft: 16,
+		paddingVertical: 16,
 		borderRadius: 100,
-		marginTop: 20,
-		marginBottom: 10,
-		alignItems: "center",
+		marginTop: 43,
+		marginBottom: 16,
+		marginHorizontal: 16,
 	},
 	ButtonText: {
 		color: "rgba(255 255 255/ 1)",
 		fontSize: 16,
+		lineHeight: 19,
+		textAlign: "center",
 	},
 	img: {
+		position: "absolute",
+		left: 128,
+		marginTop: 203,
 		width: 120,
 		height: 120,
+		backgroundColor: "#F6F6F6",
 		borderRadius: 16,
-		left: "35%",
-		top: "25%",
 		zIndex: 1,
 	},
 	textInInput: {
 		fontFamily: "R-400",
 		fontSize: 16,
+		lineHeight: 19,
 		color: "rgba(27 67 113/1)",
-		top: "-9%",
-		left: "70%",
+		position: "absolute",
+		top: "57%",
+		left: 270,
+		paddingRight: 16,
 	},
 });
