@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
 	StyleSheet,
 	Text,
@@ -7,45 +8,89 @@ import {
 	Image,
 	TouchableWithoutFeedback,
 	ImageBackground,
+	Keyboard,
+	KeyboardAvoidingView,
+	ScrollView,
 } from "react-native";
 
 export default function Login() {
+	const [focusEmail, setFocusEmail] = useState(false);
+	const [focusPassword, setFocusPassword] = useState(false);
+	const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+
+	const keyboardIsHidden = () => {
+		Keyboard.dismiss();
+	};
 	return (
-		<View>
-			<ImageBackground
-				source={require("../assets/photo.png")}
-				style={styles.image}
-			>
-				<View style={styles.formWrapper}>
-					<Text style={styles.text}>Увійти</Text>
+		<KeyboardAvoidingView
+			behavior={Platform.OS === "ios" ? "padding" : "height"}
+		>
+			<TouchableWithoutFeedback onPress={keyboardIsHidden}>
+				<View>
+					<ScrollView>
+						<ImageBackground
+							source={require("../../assets/photo.png")}
+							style={styles.image}
+						>
+							<View style={styles.formWrapper}>
+								<Text style={styles.text}>Увійти</Text>
 
-					<TextInput
-						style={styles.input}
-						placeholder="Адреса електронної пошти"
-					/>
-					<TextInput style={styles.input}>............</TextInput>
-					<TouchableWithoutFeedback
-						onPress={() => console.log("Натиснули на Показати")}
-					>
-						<Text style={styles.textInInput}>Показати</Text>
-					</TouchableWithoutFeedback>
+								<TextInput
+									style={{
+										...styles.input,
+										borderColor: focusEmail ? "#FF6C00" : "#E8E8E8",
+										backgroundColor: focusEmail
+											? "#fff"
+											: "rgba(246 246 246/ 1)",
+									}}
+									placeholder="Адреса електронної пошти"
+									onFocus={() => setFocusEmail(true)}
+									onBlur={() => setFocusEmail(false)}
+								/>
+								<TextInput
+									style={{
+										...styles.input,
+										borderColor: focusPassword ? "#FF6C00" : "#E8E8E8",
+										backgroundColor: focusPassword
+											? "#fff"
+											: "rgba(246 246 246/ 1)",
+									}}
+									placeholder="Пароль"
+									onFocus={() => setFocusPassword(true)}
+									onBlur={() => setFocusPassword(false)}
+									secureTextEntry={isPasswordSecure}
+								/>
+								<TouchableWithoutFeedback
+									onPress={() => {
+										isPasswordSecure
+											? setIsPasswordSecure(false)
+											: setIsPasswordSecure(true);
+									}}
+								>
+									<Text style={styles.textInInput}>
+										{isPasswordSecure ? "Показати" : " Приховати"}
+									</Text>
+								</TouchableWithoutFeedback>
 
-					<TouchableOpacity style={styles.button}>
-						<Text style={styles.ButtonText}>Увійти</Text>
-					</TouchableOpacity>
-					<TouchableOpacity>
-						<Text style={styles.textAccount}>
-							Немає акаунту?
-							<Text style={styles.textAccountLine}> Зареєструватися</Text>
-						</Text>
-					</TouchableOpacity>
-					<Image
-						source={require("../assets/indicator.png")}
-						style={styles.indicator}
-					/>
+								<TouchableOpacity style={styles.button}>
+									<Text style={styles.ButtonText}>Увійти</Text>
+								</TouchableOpacity>
+								<TouchableOpacity>
+									<Text style={styles.textAccount}>
+										Немає акаунту?
+										<Text style={styles.textAccountLine}> Зареєструватися</Text>
+									</Text>
+								</TouchableOpacity>
+								<Image
+									source={require("../../assets/indicator.png")}
+									style={styles.indicator}
+								/>
+							</View>
+						</ImageBackground>
+					</ScrollView>
 				</View>
-			</ImageBackground>
-		</View>
+			</TouchableWithoutFeedback>
+		</KeyboardAvoidingView>
 	);
 }
 
@@ -56,6 +101,7 @@ const styles = StyleSheet.create({
 		color: "rgba(27 67 113/ 1)",
 		textAlign: "center",
 		marginTop: 15,
+		marginBottom: 111,
 	},
 	textAccountLine: {
 		fontFamily: "R-400",
@@ -67,23 +113,21 @@ const styles = StyleSheet.create({
 	},
 	indicator: {
 		alignSelf: "center",
-		top: "15%",
+		justifyContent: "flex-end",
 	},
 	formWrapper: {
 		backgroundColor: "rgba(255 255 255/ 1)",
 		borderTopStartRadius: 25,
 		borderTopEndRadius: 25,
-		height: 489,
-		marginTop: 340,
+		marginTop: 263,
 	},
-	image: {
-		flex: 1,
+	backgroundImg: {
+		justifyContent: "flex-end",
 		resizeMode: "cover",
-		justifyContent: "center",
 	},
 	text: {
-		marginTop: 80,
-		marginBottom: 20,
+		marginVertical: 32,
+		lineHeight: 35,
 		color: "rgba(33 33 33/ 1)",
 		textAlign: "center",
 		fontFamily: "R-500",
@@ -93,40 +137,38 @@ const styles = StyleSheet.create({
 		fontFamily: "R-400",
 		width: 343,
 		height: 50,
-		backgroundColor: "rgba(246 246 246/ 1)",
 		borderWidth: 1,
-		borderColor: "rgba(232 232 232/ 1)",
-		borderRadius: 6,
+		borderRadius: 8,
 		fontSize: 16,
-		marginBottom: 15,
-		marginLeft: 16,
-		marginRight: 16,
-		paddingLeft: 10,
+		marginBottom: 16,
+		marginHorizontal: 25,
+		paddingHorizontal: 16,
+		paddingTop: 16,
+		paddingBottom: 15,
 	},
 	button: {
 		fontFamily: "R-400",
 		backgroundColor: "rgba(255 108 0/ 1)",
-		width: 343,
 		height: 51,
-		paddingTop: 16,
-		paddingRight: 32,
-		paddingBottom: 16,
-		paddingLeft: 32,
-		marginLeft: 16,
+		paddingVertical: 16,
 		borderRadius: 100,
-		marginTop: 20,
-		marginBottom: 10,
-		alignItems: "center",
+		marginTop: 43,
+		marginBottom: 16,
+		marginHorizontal: 25,
 	},
 	ButtonText: {
 		color: "rgba(255 255 255/ 1)",
 		fontSize: 16,
+		lineHeight: 19,
+		textAlign: "center",
 	},
 	textInInput: {
 		fontFamily: "R-400",
 		fontSize: 16,
+		lineHeight: 19,
 		color: "rgba(27 67 113/1)",
-		top: "-10%",
-		left: "70%",
+		position: "absolute",
+		top: "37%",
+		left: 275,
 	},
 });

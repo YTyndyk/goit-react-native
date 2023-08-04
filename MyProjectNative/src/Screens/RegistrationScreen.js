@@ -31,7 +31,7 @@ export default function Registration() {
 				<View>
 					<ImageBackground
 						source={require("../../assets/photo.png")}
-						style={styles.bgImage}
+						style={styles.backgroundImg}
 					>
 						<ScrollView>
 							<Image
@@ -50,6 +50,9 @@ export default function Registration() {
 									style={{
 										...styles.input,
 										borderColor: focusLogin ? "#FF6C00" : "#E8E8E8",
+										backgroundColor: focusLogin
+											? "#fff"
+											: "rgba(246 246 246/ 1)",
 									}}
 									placeholder="Логін"
 									onFocus={() => setFocusLogin(true)}
@@ -59,6 +62,9 @@ export default function Registration() {
 									style={{
 										...styles.input,
 										borderColor: focusEmail ? "#FF6C00" : "#E8E8E8",
+										backgroundColor: focusEmail
+											? "#fff"
+											: "rgba(246 246 246/ 1)",
 									}}
 									placeholder="Адреса електронної пошти"
 									onFocus={() => setFocusEmail(true)}
@@ -68,6 +74,9 @@ export default function Registration() {
 									style={{
 										...styles.input,
 										borderColor: focusPassword ? "#FF6C00" : "#E8E8E8",
+										backgroundColor: focusPassword
+											? "#fff"
+											: "rgba(246 246 246/ 1)",
 									}}
 									placeholder="Пароль"
 									onFocus={() => setFocusPassword(true)}
@@ -106,7 +115,10 @@ export default function Registration() {
 }
 
 const styles = StyleSheet.create({
-	bgImage: { resizeMode: "cover" },
+	backgroundImg: {
+		justifyContent: "flex-end",
+		resizeMode: "cover",
+	},
 	textAccount: {
 		fontFamily: "R-400",
 		fontSize: 16,
@@ -125,8 +137,6 @@ const styles = StyleSheet.create({
 	indicator: {
 		alignSelf: "center",
 		justifyContent: "flex-end",
-		marginBottom: 5,
-		marginBottom: 1,
 	},
 	formWrapper: {
 		backgroundColor: "rgba(255 255 255/ 1)",
@@ -148,12 +158,11 @@ const styles = StyleSheet.create({
 		fontFamily: "R-400",
 		width: 343,
 		height: 50,
-		backgroundColor: "rgba(246 246 246/ 1)",
 		borderWidth: 1,
 		borderRadius: 8,
 		fontSize: 16,
 		marginBottom: 16,
-		marginHorizontal: 16,
+		marginHorizontal: 25,
 		paddingHorizontal: 16,
 		paddingTop: 16,
 		paddingBottom: 15,
@@ -166,7 +175,7 @@ const styles = StyleSheet.create({
 		borderRadius: 100,
 		marginTop: 43,
 		marginBottom: 16,
-		marginHorizontal: 16,
+		marginHorizontal: 25,
 	},
 	ButtonText: {
 		color: "rgba(255 255 255/ 1)",
@@ -191,7 +200,6 @@ const styles = StyleSheet.create({
 		color: "rgba(27 67 113/1)",
 		position: "absolute",
 		top: "57%",
-		left: 270,
-		paddingRight: 16,
+		left: 275,
 	},
 });
