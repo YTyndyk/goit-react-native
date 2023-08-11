@@ -1,48 +1,25 @@
 import React, { useState } from "react";
-import { Ionicons } from "@expo/vector-icons";
+
 import {
 	StyleSheet,
 	Text,
 	View,
 	TextInput,
 	TouchableOpacity,
-	Image,
 	TouchableWithoutFeedback,
 } from "react-native";
 
-export default function FormRegistration() {
-	const [focusLogin, setFocusLogin] = useState(false);
+export default function FormLogin() {
 	const [focusEmail, setFocusEmail] = useState(false);
 	const [focusPassword, setFocusPassword] = useState(false);
 	const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 
 	return (
 		<View>
-			<View style={styles.user}>
-				<Image source={require("../../assets/Empty.png")} style={styles.img} />
-				<TouchableOpacity style={styles.iconAdd}>
-					<Ionicons
-						name="add-circle-outline"
-						size={25}
-						color="rgba(255 108 0/ 1)"
-					/>
-				</TouchableOpacity>
-			</View>
-
 			<View>
-				<Text style={styles.text}>Реєстрація</Text>
+				<Text style={styles.text}>Увійти</Text>
 			</View>
 
-			<TextInput
-				style={{
-					...styles.input,
-					borderColor: focusLogin ? "#FF6C00" : "#E8E8E8",
-					backgroundColor: focusLogin ? "#fff" : "rgba(246 246 246/ 1)",
-				}}
-				placeholder="Логін"
-				onFocus={() => setFocusLogin(true)}
-				onBlur={() => setFocusLogin(false)}
-			/>
 			<TextInput
 				style={{
 					...styles.input,
@@ -76,10 +53,13 @@ export default function FormRegistration() {
 				</Text>
 			</TouchableWithoutFeedback>
 			<TouchableOpacity style={styles.button}>
-				<Text style={styles.ButtonText}>Зареєструватися</Text>
+				<Text style={styles.ButtonText}>Увійти</Text>
 			</TouchableOpacity>
 			<TouchableOpacity>
-				<Text style={styles.textAccount}>Вже є акаунт? Увійти</Text>
+				<Text style={styles.textAccount}>
+					Немає акаунту?
+					<Text style={styles.textAccountLine}> Зареєструватися</Text>
+				</Text>
 			</TouchableOpacity>
 		</View>
 	);
@@ -92,27 +72,16 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		marginBottom: 45,
 	},
-	user: {
-		position: "absolute",
-		alignSelf: "center",
-		top: "-10%",
-	},
-	img: {
-		width: 120,
-		height: 120,
-		backgroundColor: "#F6F6F6",
-		borderRadius: 16,
-	},
-	iconAdd: {
-		position: "absolute",
-		right: -12,
-		top: "70%",
-		width: 25,
-		height: 25,
+	textAccountLine: {
+		fontFamily: "R-400",
+		fontSize: 16,
+		color: "rgba(27 67 113/ 1)",
+		textAlign: "center",
+		marginTop: 15,
+		textDecorationLine: "underline",
 	},
 	text: {
-		marginTop: 92,
-		marginBottom: 32,
+		marginVertical: 32,
 		lineHeight: 35,
 		color: "rgba(33 33 33/ 1)",
 		textAlign: "center",
@@ -154,7 +123,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		lineHeight: 19,
 		color: "rgba(27 67 113/1)",
-		top: "58%",
+		top: "45%",
 		right: 33,
 	},
 });

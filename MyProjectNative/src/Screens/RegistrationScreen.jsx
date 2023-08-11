@@ -7,22 +7,25 @@ import {
 	Keyboard,
 } from "react-native";
 import FormRegistration from "../components/formRegistration";
+
 export default function Registration() {
 	return (
-		<ImageBackground
-			source={require("../../assets/photo.png")}
-			style={styles.backgroundImg}
-		>
-			<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-				<KeyboardAvoidingView
-					behavior={Platform.OS === "ios" ? "padding" : "height"}
-					style={styles.formWrapper}
-					keyboardVerticalOffset={-130}
-				>
-					<FormRegistration />
-				</KeyboardAvoidingView>
-			</TouchableWithoutFeedback>
-		</ImageBackground>
+		<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+			<ImageBackground
+				source={require("../../assets/photo.png")}
+				style={styles.backgroundImg}
+			>
+				<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+					<KeyboardAvoidingView
+						behavior={Platform.OS === "ios" ? "padding" : "height"}
+						style={styles.formWrapper}
+						keyboardVerticalOffset={-130}
+					>
+						<FormRegistration />
+					</KeyboardAvoidingView>
+				</TouchableWithoutFeedback>
+			</ImageBackground>
+		</TouchableWithoutFeedback>
 	);
 }
 
