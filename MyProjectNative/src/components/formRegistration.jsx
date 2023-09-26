@@ -34,31 +34,19 @@ export default function FormRegistration() {
 			</View>
 
 			<TextInput
-				style={{
-					...styles.input,
-					borderColor: focusLogin ? "#FF6C00" : "#E8E8E8",
-					backgroundColor: focusLogin ? "#fff" : "rgba(246 246 246/ 1)",
-				}}
+				style={[styles.input, focusLogin && styles.inputFocus]}
 				placeholder="Логін"
 				onFocus={() => setFocusLogin(true)}
 				onBlur={() => setFocusLogin(false)}
 			/>
 			<TextInput
-				style={{
-					...styles.input,
-					borderColor: focusEmail ? "#FF6C00" : "#E8E8E8",
-					backgroundColor: focusEmail ? "#fff" : "rgba(246 246 246/ 1)",
-				}}
+				style={[styles.input, focusEmail && styles.inputFocus]}
 				placeholder="Адреса електронної пошти"
 				onFocus={() => setFocusEmail(true)}
 				onBlur={() => setFocusEmail(false)}
 			/>
 			<TextInput
-				style={{
-					...styles.input,
-					borderColor: focusPassword ? "#FF6C00" : "#E8E8E8",
-					backgroundColor: focusPassword ? "#fff" : "rgba(246 246 246/ 1)",
-				}}
+				style={[styles.input, focusPassword && styles.inputFocus]}
 				placeholder="Пароль"
 				onFocus={() => setFocusPassword(true)}
 				onBlur={() => setFocusPassword(false)}
@@ -130,6 +118,12 @@ const styles = StyleSheet.create({
 		paddingTop: 16,
 		paddingBottom: 15,
 		marginHorizontal: 16,
+		borderColor: "#E8E8E8",
+		backgroundColor: "rgba(246 246 246/ 1)",
+	},
+	inputFocus: {
+		borderColor: "#FF6C00",
+		backgroundColor: "#fff",
 	},
 	button: {
 		fontFamily: "R-400",
