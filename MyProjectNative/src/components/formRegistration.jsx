@@ -15,6 +15,16 @@ export default function FormRegistration() {
 	const [focusEmail, setFocusEmail] = useState(false);
 	const [focusPassword, setFocusPassword] = useState(false);
 	const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const onRegistration = () => {
+		console.log(`${name} ${email} ${password}`);
+		setName("");
+		setEmail("");
+		setPassword("");
+	};
 
 	return (
 		<View>
@@ -32,26 +42,33 @@ export default function FormRegistration() {
 			<View>
 				<Text style={styles.text}>Реєстрація</Text>
 			</View>
-
-			<TextInput
-				style={[styles.input, focusLogin && styles.inputFocus]}
-				placeholder="Логін"
-				onFocus={() => setFocusLogin(true)}
-				onBlur={() => setFocusLogin(false)}
-			/>
-			<TextInput
-				style={[styles.input, focusEmail && styles.inputFocus]}
-				placeholder="Адреса електронної пошти"
-				onFocus={() => setFocusEmail(true)}
-				onBlur={() => setFocusEmail(false)}
-			/>
-			<TextInput
-				style={[styles.input, focusPassword && styles.inputFocus]}
-				placeholder="Пароль"
-				onFocus={() => setFocusPassword(true)}
-				onBlur={() => setFocusPassword(false)}
-				secureTextEntry={isPasswordSecure}
-			/>
+			<View>
+				<TextInput
+					style={[styles.input, focusLogin && styles.inputFocus]}
+					value={name}
+					onChangeText={setName}
+					placeholder="Логін"
+					onFocus={() => setFocusLogin(true)}
+					onBlur={() => setFocusLogin(false)}
+				/>
+				<TextInput
+					style={[styles.input, focusEmail && styles.inputFocus]}
+					value={email}
+					onChangeText={setEmail}
+					placeholder="Адреса електронної пошти"
+					onFocus={() => setFocusEmail(true)}
+					onBlur={() => setFocusEmail(false)}
+				/>
+				<TextInput
+					style={[styles.input, focusPassword && styles.inputFocus]}
+					value={password}
+					onChangeText={setPassword}
+					placeholder="Пароль"
+					onFocus={() => setFocusPassword(true)}
+					onBlur={() => setFocusPassword(false)}
+					secureTextEntry={isPasswordSecure}
+				/>
+			</View>
 			<TouchableWithoutFeedback
 				onPress={() => {
 					isPasswordSecure
@@ -64,7 +81,9 @@ export default function FormRegistration() {
 				</Text>
 			</TouchableWithoutFeedback>
 			<TouchableOpacity style={styles.button}>
-				<Text style={styles.ButtonText}>Зареєструватися</Text>
+				<Text style={styles.ButtonText} onPress={onRegistration}>
+					Зареєструватися
+				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity>
 				<Text style={styles.textAccount}>Вже є акаунт? Увійти</Text>

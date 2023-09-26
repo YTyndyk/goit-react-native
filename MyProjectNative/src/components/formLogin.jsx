@@ -13,6 +13,14 @@ export default function FormLogin() {
 	const [focusEmail, setFocusEmail] = useState(false);
 	const [focusPassword, setFocusPassword] = useState(false);
 	const [isPasswordSecure, setIsPasswordSecure] = useState(true);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+
+	const onLogin = () => {
+		console.log(`${email} ${password}`);
+		setEmail("");
+		setPassword("");
+	};
 
 	return (
 		<View>
@@ -22,12 +30,16 @@ export default function FormLogin() {
 
 			<TextInput
 				style={[styles.input, focusEmail && styles.inputFocus]}
+				value={email}
+				onChangeText={setEmail}
 				placeholder="Адреса електронної пошти"
 				onFocus={() => setFocusEmail(true)}
 				onBlur={() => setFocusEmail(false)}
 			/>
 			<TextInput
 				style={[styles.input, focusPassword && styles.inputFocus]}
+				value={password}
+				onChangeText={setPassword}
 				placeholder="Пароль"
 				onFocus={() => setFocusPassword(true)}
 				onBlur={() => setFocusPassword(false)}
@@ -45,7 +57,9 @@ export default function FormLogin() {
 				</Text>
 			</TouchableWithoutFeedback>
 			<TouchableOpacity style={styles.button}>
-				<Text style={styles.ButtonText}>Увійти</Text>
+				<Text style={styles.ButtonText} onPress={onLogin}>
+					Увійти
+				</Text>
 			</TouchableOpacity>
 			<TouchableOpacity>
 				<Text style={styles.textAccount}>
@@ -91,6 +105,8 @@ const styles = StyleSheet.create({
 		paddingTop: 16,
 		paddingBottom: 15,
 		marginHorizontal: 16,
+		borderColor: "#E8E8E8",
+		backgroundColor: "rgba(246 246 246/ 1)",
 	},
 	inputFocus: {
 		borderColor: "#FF6C00",

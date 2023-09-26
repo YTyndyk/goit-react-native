@@ -1,8 +1,8 @@
 import { useFonts } from "expo-font";
 
 import { StyleSheet, SafeAreaView } from "react-native";
-import Registration from "./src/Screens/RegistrationScreen";
-// import Login from "./src/Screens/LoginScreen";
+// import Registration from "./src/Screens/RegistrationScreen";
+import Login from "./src/Screens/LoginScreen";
 
 export default function App() {
 	const [fontsLoaded] = useFonts({
@@ -14,8 +14,8 @@ export default function App() {
 	}
 	return (
 		<SafeAreaView style={styles.container}>
-			<Registration />
-			{/* <Login /> */}
+			{/* <Registration /> */}
+			<Login />
 		</SafeAreaView>
 	);
 }
