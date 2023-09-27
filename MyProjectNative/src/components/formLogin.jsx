@@ -19,11 +19,7 @@ export default function FormLogin() {
 		email: false,
 		password: false,
 	});
-	// const onLogin = () => {
-	// 	console.log(`${email} ${password}`);
-	// 	setEmail("");
-	// 	setPassword("");
-	// };
+
 	const submitData = {
 		email,
 		password,

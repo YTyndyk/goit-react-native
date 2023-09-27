@@ -19,7 +19,7 @@ export default function Login() {
 					<KeyboardAvoidingView
 						behavior={Platform.OS === "ios" ? "padding" : "height"}
 						style={styles.formWrapper}
-						keyboardVerticalOffset={-130}
+						keyboardVerticalOffset={-125}
 					>
 						<FormLogin />
 					</KeyboardAvoidingView>
