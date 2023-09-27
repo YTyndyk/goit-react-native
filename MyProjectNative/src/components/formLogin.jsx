@@ -15,9 +15,34 @@ export default function FormLogin() {
 	const [isPasswordSecure, setIsPasswordSecure] = useState(true);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [error, setError] = useState({
+		email: false,
+		password: false,
+	});
+	// const onLogin = () => {
+	// 	console.log(`${email} ${password}`);
+	// 	setEmail("");
+	// 	setPassword("");
+	// };
+	const submitData = {
+		email,
+		password,
+	};
+	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	const handleSubmit = () => {
+		if (!email) {
+			setError((prevState) => ({ ...prevState, password: true }));
+			return;
+		} else if (!emailRegex.test(email)) {
+			setError((prevState) => ({ ...prevState, email: true }));
+			return;
+		} else if (!password) {
+			setError((prevState) => ({ ...prevState, password: true }));
 
-	const onLogin = () => {
-		console.log(`${email} ${password}`);
+			return;
+		}
+
+		console.log(submitData);
 		setEmail("");
 		setPassword("");
 	};
@@ -27,19 +52,30 @@ export default function FormLogin() {
 			<View>
 				<Text style={styles.text}>Увійти</Text>
 			</View>
-
+			{error.email && (
+				<Text style={styles.errorMessage}>Please enter the correct email!</Text>
+			)}
 			<TextInput
 				style={[styles.input, focusEmail && styles.inputFocus]}
 				value={email}
-				onChangeText={setEmail}
+				onChangeText={(email) => {
+					setEmail(email);
+					setError((prevState) => ({ ...prevState, email: false }));
+				}}
 				placeholder="Адреса електронної пошти"
 				onFocus={() => setFocusEmail(true)}
 				onBlur={() => setFocusEmail(false)}
 			/>
+			{error.password && (
+				<Text style={styles.errorMessage}>Password is a required!</Text>
+			)}
 			<TextInput
 				style={[styles.input, focusPassword && styles.inputFocus]}
 				value={password}
-				onChangeText={setPassword}
+				onChangeText={(password) => {
+					setPassword(password);
+					setError((prevState) => ({ ...prevState, password: false }));
+				}}
 				placeholder="Пароль"
 				onFocus={() => setFocusPassword(true)}
 				onBlur={() => setFocusPassword(false)}
@@ -56,8 +92,9 @@ export default function FormLogin() {
 					{isPasswordSecure ? "Показати" : " Приховати"}
 				</Text>
 			</TouchableWithoutFeedback>
+
 			<TouchableOpacity style={styles.button}>
-				<Text style={styles.ButtonText} onPress={onLogin}>
+				<Text style={styles.ButtonText} onPress={handleSubmit}>
 					Увійти
 				</Text>
 			</TouchableOpacity>
@@ -93,6 +130,11 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		fontFamily: "R-500",
 		fontSize: 30,
+	},
+	errorMessage: {
+		color: "#FF6C00",
+		marginBottom: 4,
+		paddingLeft: 16,
 	},
 	input: {
 		fontFamily: "R-400",
