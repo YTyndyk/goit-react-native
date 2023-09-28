@@ -109,6 +109,7 @@ export default function FormRegistration() {
 						setError((prevState) => ({ ...prevState, password: false }));
 					}}
 					placeholder="Пароль"
+					autoCapitalize="none"
 					onFocus={() => setFocusPassword(true)}
 					onBlur={() => setFocusPassword(false)}
 					secureTextEntry={isPasswordSecure}
